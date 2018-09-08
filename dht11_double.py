@@ -13,17 +13,10 @@ instance1 = dht11.DHT11(pin=17)
 instance2 = dht11.DHT11(pin=27)
 
 while True:
-    result = instance1.read()
-    if result.is_valid():
+    result1 = instance1.read()
+    result2 = instance2.read()
+    if result1.is_valid() and result2.is_valid():
         print("Last valid input: " + str(datetime.datetime.now()))
-        print("Temperature: %d C" % result.temperature)
-        print("Temperature: %d F" % ((result.temperature * 9/5)+32))
-        print("Humidity: %d %%" % result.humidity)
-    result = instance2.read()
-    if result.is_valid():
-        print("Last valid input: " + str(datetime.datetime.now()))
-        print("Temperature: %d C" % result.temperature)
-        print("Temperature: %d F" % ((result.temperature * 9/5)+32))
-        print("Humidity: %d %%" % result.humidity)
-
-    time.sleep(1)
+        print("Temperature: %d C and %d C" % (result1.temperature,result2.temperature))
+        print("Humidity: %d %% and %d %%" % (result1.humidity, result2.humidity))
+    time.sleep(10)
